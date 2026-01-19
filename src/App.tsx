@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Component } from 'react';
+import { Header } from './components/Header';
+import { FeaturedSection } from './components/Featured';
+import { AccordionList } from './components/Accordion';
+import { featuredItems } from './data/featuredItems';
+import { accordionItems } from './data/accordionItems';
 
-function App() {
-  const [count, setCount] = useState(0)
+class App extends Component {
+  handleBackClick = (): void => {
+    console.log('Back button clicked');
+    // Navigation logic - in real app: window.history.back() or router
+  };
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  render(): React.ReactNode {
+    return (
+      <div className="min-h-screen bg-gray-100">
+        {/* Mobile Container */}
+        <div className="max-w-mobile mx-auto bg-white min-h-screen shadow-lg">
+          {/* Header */}
+          <Header
+            title="Jelajah Tokopedia"
+            onBackClick={this.handleBackClick}
+          />
+
+          {/* Main Content */}
+          <main>
+            {/* Featured Section */}
+            <FeaturedSection
+              title="Featured"
+              items={featuredItems}
+            />
+
+            {/* Accordion Categories */}
+            <AccordionList items={accordionItems} />
+          </main>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    );
+  }
 }
 
-export default App
+export default App;
