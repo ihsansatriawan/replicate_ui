@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mask shape -->
+  <ellipse cx="16" cy="16" rx="12" ry="8" fill="#E3F2FD" stroke="#0095DA" stroke-width="1.5"/>
+  <line x1="4" y1="14" x2="8" y2="12" stroke="#0095DA" stroke-width="1.5"/>
+  <line x1="28" y1="14" x2="24" y2="12" stroke="#0095DA" stroke-width="1.5"/>
+  <line x1="10" y1="14" x2="22" y2="14" stroke="#0095DA" stroke-width="1"/>
+  <line x1="10" y1="18" x2="22" y2="18" stroke="#0095DA" stroke-width="1"/>
+</svg>

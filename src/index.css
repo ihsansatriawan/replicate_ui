@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors */
+  --color-tokopedia-green: #03AC0E;
+  --color-tokopedia-green-light: #E8F5E9;
+  --color-tokopedia-green-dark: #028A0F;
+
+  /* Custom max-width */
+  --max-width-mobile: 428px;
+
+  /* Custom font family */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-100 text-gray-900 m-0 font-sans;
+  }
+}
+
+@layer components {
+  .icon-container {
+    @apply w-16 h-16 flex items-center justify-center bg-gray-50 rounded-2xl;
+  }
+}
