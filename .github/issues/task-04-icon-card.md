@@ -3,44 +3,55 @@
 **Labels:** `group-a`, `react-component`
 
 ## Description
-Create individual icon card component for the featured grid section.
+Create individual icon card class component for the featured grid with TypeScript.
 
-## File to Create
-- `src/components/Featured/IconCard.jsx`
+## Files to Create
+- `src/components/Featured/IconCard.tsx` - IconCard component
+- `src/components/Featured/index.ts` - Barrel export (partial, will be updated in Task 5)
 
-## Component Specification
-
-### Props
-- `icon` - Icon component or image source
-- `label` - Text label below the icon
-- `onClick` - Click handler function
-
-### Design Requirements
-- Rounded square container with light gray/white background
-- Icon centered in the container
-- Label text below, centered, can wrap to 2 lines
-- Subtle hover state for interactivity
-
-### Implementation
-```jsx
+## IconCard Component (src/components/Featured/IconCard.tsx)
+```typescript
 import React, { Component } from 'react';
+import { IconCardProps } from '../../types';
 
-class IconCard extends Component {
-  render() {
-    const { icon, label, onClick } = this.props;
+class IconCard extends Component<IconCardProps> {
+  handleClick = (): void => {
+    const { onClick } = this.props;
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  renderIcon(): React.ReactNode {
+    const { icon } = this.props;
+
+    // Render icon from public folder
+    return (
+      <img
+        src={`/icons/${icon}.svg`}
+        alt=""
+        className="w-8 h-8"
+        aria-hidden="true"
+      />
+    );
+  }
+
+  render(): React.ReactNode {
+    const { label } = this.props;
 
     return (
-      <div
-        className="flex flex-col items-center cursor-pointer group"
-        onClick={onClick}
+      <button
+        type="button"
+        onClick={this.handleClick}
+        className="flex flex-col items-center group cursor-pointer"
       >
         <div className="w-16 h-16 flex items-center justify-center bg-gray-50 rounded-2xl mb-2 group-hover:bg-gray-100 transition-colors">
-          {icon}
+          {this.renderIcon()}
         </div>
-        <span className="text-xs text-center text-gray-700 font-medium leading-tight max-w-[80px]">
+        <span className="text-xs text-gray-700 text-center leading-tight max-w-[80px]">
           {label}
         </span>
-      </div>
+      </button>
     );
   }
 }
@@ -48,17 +59,33 @@ class IconCard extends Component {
 export default IconCard;
 ```
 
+## Barrel Export (src/components/Featured/index.ts)
+```typescript
+export { default as IconCard } from './IconCard';
+```
+
+## Styling Details
+- Container: flex column, centered, uses button element for accessibility
+- Icon box: 64x64px, rounded-2xl (16px), light gray background (#F5F5F5)
+- Icon: 32x32px, centered
+- Label: 12px, gray-700, centered, max-width 80px
+- Hover: slightly darker background via group hover
+
 ## Technical Requirements
 - Use React class components (not functional)
+- Use TypeScript with proper type annotations
 - Use Tailwind CSS for styling
+- Use button element for accessibility
 - No hooks allowed
 
 ## Dependencies
 None - Can run in parallel with other Group A tasks
 
 ## Acceptance Criteria
-- [ ] IconCard renders icon and label correctly
-- [ ] Click handler works properly
-- [ ] Styling matches the UI design (rounded container, centered content)
-- [ ] Uses class-based React component
-- [ ] Label supports multi-line text
+- [ ] IconCard displays icon and label
+- [ ] Click handler works correctly
+- [ ] Proper hover state
+- [ ] Responsive text wrapping for long labels
+- [ ] TypeScript types properly defined
+- [ ] Uses class-based component syntax
+- [ ] Uses semantic button element

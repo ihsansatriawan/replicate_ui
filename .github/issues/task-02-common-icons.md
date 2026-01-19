@@ -3,29 +3,30 @@
 **Labels:** `group-a`, `react-component`
 
 ## Description
-Create reusable SVG icon components using React class components.
+Create reusable SVG icon class components with TypeScript.
 
 ## Files to Create
-- `src/components/common/ChevronIcon.jsx` - Chevron up/down icon
-- `src/components/common/BackArrowIcon.jsx` - Back arrow icon
+- `src/components/common/ChevronIcon.tsx` - Chevron up/down icon
+- `src/components/common/BackArrowIcon.tsx` - Back arrow icon
+- `src/components/common/index.ts` - Barrel export
 
-## Component Specifications
-
-### ChevronIcon.jsx
-```jsx
+## ChevronIcon Component (src/components/common/ChevronIcon.tsx)
+```typescript
 import React, { Component } from 'react';
+import { ChevronIconProps } from '../../types';
 
-class ChevronIcon extends Component {
-  render() {
-    const { direction = 'down', className = '' } = this.props;
+class ChevronIcon extends Component<ChevronIconProps> {
+  render(): React.ReactNode {
+    const { direction, className = '' } = this.props;
     const rotation = direction === 'up' ? 'rotate-180' : '';
 
     return (
       <svg
-        className={`w-6 h-6 transition-transform ${rotation} ${className}`}
+        className={`w-5 h-5 transition-transform duration-200 ${rotation} ${className}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           strokeLinecap="round"
@@ -41,21 +42,22 @@ class ChevronIcon extends Component {
 export default ChevronIcon;
 ```
 
-### BackArrowIcon.jsx
-```jsx
+## BackArrowIcon Component (src/components/common/BackArrowIcon.tsx)
+```typescript
 import React, { Component } from 'react';
+import { BackArrowIconProps } from '../../types';
 
-class BackArrowIcon extends Component {
-  render() {
-    const { className = '', onClick } = this.props;
+class BackArrowIcon extends Component<BackArrowIconProps> {
+  render(): React.ReactNode {
+    const { className = '' } = this.props;
 
     return (
       <svg
-        className={`w-6 h-6 cursor-pointer ${className}`}
+        className={`w-6 h-6 ${className}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
-        onClick={onClick}
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           strokeLinecap="round"
@@ -71,10 +73,17 @@ class BackArrowIcon extends Component {
 export default BackArrowIcon;
 ```
 
+## Barrel Export (src/components/common/index.ts)
+```typescript
+export { default as ChevronIcon } from './ChevronIcon';
+export { default as BackArrowIcon } from './BackArrowIcon';
+```
+
 ## Technical Requirements
 - Use React class components (not functional)
+- Use TypeScript with proper type annotations
 - Use Tailwind CSS for styling
-- Icons should be scalable via className prop
+- Icons should accept className prop for customization
 - No hooks allowed
 
 ## Dependencies
@@ -83,5 +92,8 @@ None - Can run in parallel with other Group A tasks
 ## Acceptance Criteria
 - [ ] ChevronIcon renders correctly with up/down directions
 - [ ] BackArrowIcon renders correctly
-- [ ] Both components use class-based syntax
-- [ ] Tailwind classes applied for styling
+- [ ] Both components accept className prop for customization
+- [ ] TypeScript types are properly defined and imported
+- [ ] Smooth rotation transition on ChevronIcon
+- [ ] Components use class-based syntax (not functional)
+- [ ] No TypeScript compilation errors

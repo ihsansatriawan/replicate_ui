@@ -3,44 +3,36 @@
 **Labels:** `group-d`, `react-component`
 
 ## Description
-Create main App component that assembles all components together.
+Create main App class component that assembles all components together using TypeScript.
 
-## File to Create/Modify
-- `src/App.jsx`
+## Files to Create/Update
+- `src/App.tsx` - Main App component
+- `src/main.tsx` - Entry point (Vite)
 
-## Component Specification
-
-### Design Requirements
-- Mobile-first container (max-width ~428px, centered)
-- Light gray background for the page
-- White background for content sections
-- Proper spacing between sections
-
-### Implementation
-```jsx
+## App Component (src/App.tsx)
+```typescript
 import React, { Component } from 'react';
-import Header from './components/Header/Header';
-import FeaturedSection from './components/Featured/FeaturedSection';
-import AccordionList from './components/Accordion/AccordionList';
-import featuredItems from './data/featuredItems';
-import accordionItems from './data/accordionItems';
+import { Header } from './components/Header';
+import { FeaturedSection } from './components/Featured';
+import { AccordionList } from './components/Accordion';
+import { featuredItems } from './data/featuredItems';
+import { accordionItems } from './data/accordionItems';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleBackClick = this.handleBackClick.bind(this);
-  }
+interface AppProps {}
+interface AppState {}
 
-  handleBackClick() {
+class App extends Component<AppProps, AppState> {
+  handleBackClick = (): void => {
+    // Handle navigation back
     console.log('Back button clicked');
-    // Navigation logic here
-  }
+    // In real app: window.history.back() or router navigation
+  };
 
-  render() {
+  render(): React.ReactNode {
     return (
       <div className="min-h-screen bg-gray-100">
         {/* Mobile Container */}
-        <div className="max-w-md mx-auto bg-white min-h-screen shadow-lg">
+        <div className="max-w-mobile mx-auto bg-white min-h-screen shadow-lg">
           {/* Header */}
           <Header
             title="Jelajah Tokopedia"
@@ -55,10 +47,7 @@ class App extends Component {
               items={featuredItems}
             />
 
-            {/* Divider */}
-            <div className="h-2 bg-gray-100" />
-
-            {/* Accordion Menu */}
+            {/* Accordion Categories */}
             <AccordionList items={accordionItems} />
           </main>
         </div>
@@ -70,23 +59,87 @@ class App extends Component {
 export default App;
 ```
 
+## Entry Point (src/main.tsx)
+```typescript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
+
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
+```
+
+## Project Structure (Final)
+```
+src/
+├── components/
+│   ├── common/
+│   │   ├── ChevronIcon.tsx
+│   │   ├── BackArrowIcon.tsx
+│   │   └── index.ts
+│   ├── Header/
+│   │   ├── Header.tsx
+│   │   └── index.ts
+│   ├── Featured/
+│   │   ├── IconCard.tsx
+│   │   ├── FeaturedSection.tsx
+│   │   └── index.ts
+│   └── Accordion/
+│       ├── AccordionItem.tsx
+│       ├── AccordionList.tsx
+│       └── index.ts
+├── data/
+│   ├── featuredItems.ts
+│   └── accordionItems.ts
+├── types/
+│   └── index.ts
+├── App.tsx
+├── main.tsx
+└── index.css
+public/
+└── icons/
+    ├── computer-laptop.svg
+    ├── fashion-wanita.svg
+    ├── kesehatan.svg
+    ├── promo.svg
+    ├── pulsa.svg
+    ├── tokopedia-card.svg
+    └── tokopedia-farma.svg
+```
+
+## Styling Details
+- Outer container: gray-100 background, full height
+- Inner container: max-width 428px (mobile), centered, white background
+- Shadow for depth on desktop view
+
 ## Technical Requirements
 - Use React class components (not functional)
+- Use TypeScript with proper type annotations
 - Use Tailwind CSS for styling
-- Import and use all created components
-- Mobile-first responsive design
 - No hooks allowed
+- Use arrow functions for class methods
 
 ## Dependencies
-- Task 1 (Data Layer - featuredItems, accordionItems)
-- Task 3 (Header component)
-- Task 5 (FeaturedSection component)
-- Task 7 (AccordionList component)
+- Task 1: Data files and types
+- Task 3: Header component
+- Task 5: FeaturedSection component
+- Task 7: AccordionList component
+- Task 10: Tailwind configuration
 
 ## Acceptance Criteria
-- [ ] App renders all sections correctly
-- [ ] Mobile container is properly sized and centered
-- [ ] Header, Featured, and Accordion sections display
-- [ ] Data is passed correctly to components
-- [ ] Uses class-based React component
-- [ ] Styling matches the reference UI
+- [ ] App renders without errors
+- [ ] All components properly imported and displayed
+- [ ] Mobile-first responsive layout (max-w-mobile)
+- [ ] Centered container on larger screens
+- [ ] TypeScript compiles without errors
+- [ ] Uses class-based component syntax
+- [ ] Matches reference design layout
+- [ ] No console errors or warnings
