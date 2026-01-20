@@ -8,11 +8,12 @@ class ChevronIcon extends Component<ChevronIconProps> {
 
     return (
       <svg
-        className={`w-5 h-5 transition-transform duration-200 ${rotation} ${className}`}
+        className={`w-5 h-5 transition-transform duration-200 ease-in-out ${rotation} ${className}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
