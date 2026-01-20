@@ -11,6 +11,7 @@ A React TypeScript implementation of Tokopedia's "Jelajah Tokopedia" (Explore To
 - **Package Manager:** npm
 - **Linting:** ESLint 9.39.1
 
+
 ## Prerequisites
 
 Before getting started, ensure you have the following installed on your system:
