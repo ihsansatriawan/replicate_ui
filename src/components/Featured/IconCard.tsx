@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import type { IconCardProps } from '../../types';
+import type { IconCardProps, IconCardState } from '../../types';
 
-class IconCard extends Component<IconCardProps> {
+class IconCard extends Component<IconCardProps, IconCardState> {
+  state: IconCardState = {
+    imageError: false,
+  };
+
   handleClick = (): void => {
     const { onClick } = this.props;
     if (onClick) {
@@ -9,8 +13,21 @@ class IconCard extends Component<IconCardProps> {
     }
   };
 
+  handleImageError = (): void => {
+    this.setState({ imageError: true });
+  };
+
   renderIcon(): React.ReactNode {
     const { icon } = this.props;
+    const { imageError } = this.state;
+
+    if (imageError) {
+      return (
+        <div className="w-8 h-8 flex items-center justify-center bg-gray-300 rounded text-gray-600 text-xs font-semibold">
+          ?
+        </div>
+      );
+    }
 
     return (
       <img
@@ -18,6 +35,7 @@ class IconCard extends Component<IconCardProps> {
         alt=""
         className="w-8 h-8"
         aria-hidden="true"
+        onError={this.handleImageError}
       />
     );
   }
@@ -29,12 +47,13 @@ class IconCard extends Component<IconCardProps> {
       <button
         type="button"
         onClick={this.handleClick}
-        className="flex flex-col items-center group cursor-pointer bg-transparent border-none p-0"
+        aria-label={label}
+        className="flex flex-col items-center group cursor-pointer bg-transparent border-none p-0 min-h-[88px] focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 rounded-2xl active:bg-gray-200"
       >
         <div className="w-16 h-16 flex items-center justify-center bg-gray-50 rounded-2xl mb-2 group-hover:bg-gray-100 transition-colors">
           {this.renderIcon()}
         </div>
-        <span className="text-xs text-gray-700 text-center leading-tight max-w-[80px]">
+        <span className="text-xs text-gray-700 text-center leading-tight max-w-20">
           {label}
         </span>
       </button>

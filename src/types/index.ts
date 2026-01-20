@@ -19,6 +19,10 @@ export interface IconCardProps {
   onClick?: () => void;
 }
 
+export interface IconCardState {
+  imageError: boolean;
+}
+
 export interface HeaderProps {
   title: string;
   onBackClick?: () => void;
