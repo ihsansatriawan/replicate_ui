@@ -21,17 +21,25 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
     const { expandedId } = this.state;
 
     return (
-      <div className="bg-white">
-        {items.map((item) => (
-          <AccordionItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            isExpanded={expandedId === item.id}
-            onToggle={this.handleToggle}
-          />
-        ))}
-      </div>
+      <nav aria-label="Category navigation">
+        <div className="bg-white" role="list">
+          {items.length === 0 ? (
+            <div className="px-4 py-8 text-center text-gray-500">
+              No categories available
+            </div>
+          ) : (
+            items.map((item) => (
+              <AccordionItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                isExpanded={expandedId === item.id}
+                onToggle={this.handleToggle}
+              />
+            ))
+          )}
+        </div>
+      </nav>
     );
   }
 }
