@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import type { AccordionListProps, AccordionListState } from '../../types';
 import AccordionItem from './AccordionItem';
+import { IconCard } from '../Featured';
 
 class AccordionList extends Component<AccordionListProps, AccordionListState> {
   constructor(props: AccordionListProps) {
@@ -36,7 +37,19 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
                 icon={item.icon}
                 isExpanded={expandedId === item.id}
                 onToggle={this.handleToggle}
-              />
+              >
+                {item.children && item.children.length > 0 && (
+                  <div className="grid grid-cols-4 gap-4">
+                    {item.children.map((child) => (
+                      <IconCard
+                        key={child.id}
+                        icon={child.icon || ''}
+                        label={child.title}
+                      />
+                    ))}
+                  </div>
+                )}
+              </AccordionItem>
             ))
           )}
         </div>

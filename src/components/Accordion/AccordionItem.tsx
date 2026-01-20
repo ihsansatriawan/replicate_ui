@@ -48,9 +48,11 @@ class AccordionItem extends Component<AccordionItemProps> {
           }`}
           aria-hidden={!isExpanded}
         >
-          <div className="px-4 pb-4">
-            {children}
-          </div>
+          {children && (
+            <div className="px-4 pb-4">
+              {children}
+            </div>
+          )}
         </div>
       </div>
     );
