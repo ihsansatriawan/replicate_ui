@@ -27,8 +27,9 @@ class FeaturedSection extends Component<FeaturedSectionProps, FeaturedSectionSta
         <button
           type="button"
           onClick={this.handleToggle}
-          className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-50 transition-colors"
+          className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
           aria-expanded={isExpanded}
+          aria-controls="featured-content"
         >
           <h2 className="text-base font-semibold text-gray-900">
             {title}
@@ -40,20 +41,22 @@ class FeaturedSection extends Component<FeaturedSectionProps, FeaturedSectionSta
         </button>
 
         {/* Icon Grid */}
-        {isExpanded && (
-          <div className="px-4 pb-4">
-            <div className="grid grid-cols-4 gap-4">
-              {items.map((item) => (
-                <IconCard
-                  key={item.id}
-                  icon={item.icon}
-                  label={item.label}
-                  onClick={item.onClick}
-                />
-              ))}
-            </div>
+        <div
+          id="featured-content"
+          className={`px-4 overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96 opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
+          aria-hidden={!isExpanded}
+        >
+          <div className="grid grid-cols-4 gap-4">
+            {items.map((item) => (
+              <IconCard
+                key={item.id}
+                icon={item.icon}
+                label={item.label}
+                onClick={item.onClick}
+              />
+            ))}
           </div>
-        )}
+        </div>
 
         {/* Bottom Border */}
         <div className="h-2 bg-gray-100" />
