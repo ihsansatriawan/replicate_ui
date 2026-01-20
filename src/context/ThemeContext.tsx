@@ -54,11 +54,8 @@ export class ThemeProvider extends Component<ThemeProviderProps, ThemeProviderSt
   // Apply theme class to document element
   applyTheme = (theme: Theme): void => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    // Use toggle with force parameter for more reliable class management
+    root.classList.toggle('dark', theme === 'dark');
   };
 
   // Save theme to localStorage

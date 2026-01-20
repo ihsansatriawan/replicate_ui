@@ -7,13 +7,11 @@ import App from './App.tsx'
 (() => {
   try {
     const savedTheme = localStorage.getItem('replicate-ui-theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else if (savedTheme === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+    // Use toggle with force parameter for reliable class management
+    document.documentElement.classList.toggle('dark', shouldBeDark);
   } catch (e) {
     // Ignore localStorage errors
   }
