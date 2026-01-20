@@ -9,7 +9,8 @@ class AccordionItem extends Component<AccordionItemProps> {
   };
 
   render(): React.ReactNode {
-    const { title, isExpanded, children } = this.props;
+    const { id, title, icon, isExpanded, children } = this.props;
+    const contentId = `accordion-content-${id}`;
 
     return (
       <div className="border-b border-gray-100">
@@ -17,12 +18,22 @@ class AccordionItem extends Component<AccordionItemProps> {
         <button
           type="button"
           onClick={this.handleClick}
-          className="flex items-center justify-between w-full px-4 py-4 hover:bg-gray-50 transition-colors"
+          className="flex items-center justify-between w-full min-h-[56px] px-4 py-4 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
           aria-expanded={isExpanded}
+          aria-controls={contentId}
         >
-          <span className="text-base font-semibold text-gray-900">
-            {title}
-          </span>
+          <div className="flex items-center gap-3">
+            {icon && (
+              <img
+                src={`/icons/${icon}.svg`}
+                alt=""
+                className="w-6 h-6 text-tokopedia-green"
+              />
+            )}
+            <span className="text-base font-semibold text-gray-900">
+              {title}
+            </span>
+          </div>
           <ChevronIcon
             direction={isExpanded ? 'up' : 'down'}
             className="w-5 h-5 text-gray-500"
@@ -30,11 +41,19 @@ class AccordionItem extends Component<AccordionItemProps> {
         </button>
 
         {/* Expandable Content */}
-        {isExpanded && children && (
-          <div className="px-4 pb-4">
-            {children}
-          </div>
-        )}
+        <div
+          id={contentId}
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+          aria-hidden={!isExpanded}
+        >
+          {children && (
+            <div className="px-4 pb-4">
+              {children}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

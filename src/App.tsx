@@ -7,7 +7,6 @@ import { accordionItems } from './data/accordionItems';
 
 class App extends Component {
   handleBackClick = (): void => {
-    console.log('Back button clicked');
     // Navigation logic - in real app: window.history.back() or router
   };
 
@@ -16,6 +15,14 @@ class App extends Component {
       <div className="min-h-screen bg-gray-100">
         {/* Mobile Container */}
         <div className="max-w-mobile mx-auto bg-white min-h-screen shadow-lg">
+          {/* Skip Link for Keyboard Navigation */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-tokopedia-green focus:text-white focus:rounded"
+          >
+            Skip to main content
+          </a>
+
           {/* Header */}
           <Header
             title="Jelajah Tokopedia"
@@ -23,7 +30,7 @@ class App extends Component {
           />
 
           {/* Main Content */}
-          <main>
+          <main id="main-content" aria-label="Main content">
             {/* Featured Section */}
             <FeaturedSection
               title="Featured"

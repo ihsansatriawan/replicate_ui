@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import type { AccordionListProps, AccordionListState } from '../../types';
 import AccordionItem from './AccordionItem';
+import { IconCard } from '../Featured';
 
 class AccordionList extends Component<AccordionListProps, AccordionListState> {
   constructor(props: AccordionListProps) {
@@ -21,17 +22,38 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
     const { expandedId } = this.state;
 
     return (
-      <div className="bg-white">
-        {items.map((item) => (
-          <AccordionItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            isExpanded={expandedId === item.id}
-            onToggle={this.handleToggle}
-          />
-        ))}
-      </div>
+      <nav aria-label="Category navigation">
+        <div className="bg-white" role="list">
+          {items.length === 0 ? (
+            <div className="px-4 py-8 text-center text-gray-500">
+              No categories available
+            </div>
+          ) : (
+            items.map((item) => (
+              <AccordionItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                icon={item.icon}
+                isExpanded={expandedId === item.id}
+                onToggle={this.handleToggle}
+              >
+                {item.children && item.children.length > 0 && (
+                  <div className="grid grid-cols-4 gap-4">
+                    {item.children.map((child) => (
+                      <IconCard
+                        key={child.id}
+                        icon={child.icon || ''}
+                        label={child.title}
+                      />
+                    ))}
+                  </div>
+                )}
+              </AccordionItem>
+            ))
+          )}
+        </div>
+      </nav>
     );
   }
 }

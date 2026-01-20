@@ -10,6 +10,7 @@ export interface FeaturedItem {
 export interface AccordionItemData {
   id: string;
   title: string;
+  icon?: string;
   children?: AccordionItemData[];
 }
 
@@ -40,6 +41,7 @@ export interface FeaturedSectionState {
 export interface AccordionItemProps {
   id: string;
   title: string;
+  icon?: string;
   isExpanded: boolean;
   onToggle: (id: string) => void;
   children?: React.ReactNode;
