@@ -23,9 +23,9 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
 
     return (
       <nav aria-label="Category navigation">
-        <div className="bg-white" role="list">
+        <div className="bg-white dark:bg-dark-bg-secondary" role="list">
           {items.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">
+            <div className="px-4 py-8 text-center text-gray-500 dark:text-dark-text-secondary">
               No categories available
             </div>
           ) : (
@@ -39,7 +39,7 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
                 onToggle={this.handleToggle}
               >
                 {item.children && item.children.length > 0 && (
-                  <div className="grid grid-cols-4 gap-4">
+                  <div className="grid grid-cols-4 gap-4 bg-gray-50 dark:bg-dark-bg-primary p-4 rounded-lg">
                     {item.children.map((child) => (
                       <IconCard
                         key={child.id}
