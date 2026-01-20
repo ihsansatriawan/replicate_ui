@@ -9,7 +9,7 @@ class AccordionItem extends Component<AccordionItemProps> {
   };
 
   render(): React.ReactNode {
-    const { id, title, isExpanded, children } = this.props;
+    const { id, title, icon, isExpanded, children } = this.props;
     const contentId = `accordion-content-${id}`;
 
     return (
@@ -22,9 +22,18 @@ class AccordionItem extends Component<AccordionItemProps> {
           aria-expanded={isExpanded}
           aria-controls={contentId}
         >
-          <span className="text-base font-semibold text-gray-900">
-            {title}
-          </span>
+          <div className="flex items-center gap-3">
+            {icon && (
+              <img
+                src={`/icons/${icon}.svg`}
+                alt=""
+                className="w-6 h-6 text-tokopedia-green"
+              />
+            )}
+            <span className="text-base font-semibold text-gray-900">
+              {title}
+            </span>
+          </div>
           <ChevronIcon
             direction={isExpanded ? 'up' : 'down'}
             className="w-5 h-5 text-gray-500"

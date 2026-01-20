@@ -33,6 +33,7 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
                 key={item.id}
                 id={item.id}
                 title={item.title}
+                icon={item.icon}
                 isExpanded={expandedId === item.id}
                 onToggle={this.handleToggle}
               />
