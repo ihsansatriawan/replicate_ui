@@ -13,12 +13,12 @@ class AccordionItem extends Component<AccordionItemProps> {
     const contentId = `accordion-content-${id}`;
 
     return (
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100 dark:border-gray-800">
         {/* Accordion Header */}
         <button
           type="button"
           onClick={this.handleClick}
-          className="flex items-center justify-between w-full min-h-[56px] px-4 py-4 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
+          className="flex items-center justify-between w-full min-h-[56px] px-4 py-4 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
           aria-expanded={isExpanded}
           aria-controls={contentId}
         >
@@ -30,13 +30,13 @@ class AccordionItem extends Component<AccordionItemProps> {
                 className="w-6 h-6 text-tokopedia-green"
               />
             )}
-            <span className="text-base font-semibold text-gray-900">
+            <span className="text-base font-semibold text-gray-900 dark:text-white">
               {title}
             </span>
           </div>
           <ChevronIcon
             direction={isExpanded ? 'up' : 'down'}
-            className="w-5 h-5 text-gray-500"
+            className="w-5 h-5 text-gray-500 dark:text-gray-400"
           />
         </button>
 

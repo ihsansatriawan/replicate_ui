@@ -27,6 +27,13 @@ export interface IconCardState {
 export interface HeaderProps {
   title: string;
   onBackClick?: () => void;
+  isDarkMode?: boolean;
+  onDarkModeToggle?: () => void;
+}
+
+export interface DarkModeToggleProps {
+  isDarkMode: boolean;
+  onToggle: () => void;
 }
 
 export interface FeaturedSectionProps {

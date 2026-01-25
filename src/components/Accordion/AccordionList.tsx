@@ -23,9 +23,9 @@ class AccordionList extends Component<AccordionListProps, AccordionListState> {
 
     return (
       <nav aria-label="Category navigation">
-        <div className="bg-white" role="list">
+        <div className="bg-white dark:bg-gray-900" role="list">
           {items.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">
+            <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
               No categories available
             </div>
           ) : (
