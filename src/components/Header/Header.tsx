@@ -6,6 +6,7 @@ import { ThemeContext } from '../../context';
 class Header extends Component<HeaderProps> {
   static contextType = ThemeContext;
   declare context: React.ContextType<typeof ThemeContext>;
+
   handleBackClick = (): void => {
     const { onBackClick } = this.props;
     if (onBackClick) {
@@ -13,13 +14,16 @@ class Header extends Component<HeaderProps> {
     }
   };
 
-  handleThemeToggle = (): void => {
+  handleDarkModeToggle = (): void => {
+    const { onDarkModeToggle } = this.props;
+    if (onDarkModeToggle) {
+      onDarkModeToggle();
+    }
     this.context.toggleTheme();
   };
 
   render(): React.ReactNode {
-    const { title } = this.props;
-    const { theme } = this.context;
+    const { title, isDarkMode = false } = this.props;
 
     return (
       <header className="sticky top-0 z-10 bg-white dark:bg-dark-bg-secondary border-b border-gray-100 dark:border-dark-border">
@@ -28,7 +32,7 @@ class Header extends Component<HeaderProps> {
             <button
               type="button"
               onClick={this.handleBackClick}
-              className="flex items-center justify-center w-11 h-11 -ml-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary active:bg-gray-200 dark:active:bg-dark-bg-primary focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 transition-colors"
+              className="flex items-center justify-center w-11 h-11 -ml-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary active:bg-gray-200 dark:active:bg-dark-bg-primary focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 dark:focus:ring-offset-dark-bg-secondary transition-colors"
               aria-label="Go back"
             >
               <BackArrowIcon className="w-6 h-6 text-gray-800 dark:text-dark-text-primary" />
@@ -39,14 +43,15 @@ class Header extends Component<HeaderProps> {
           </div>
           <button
             type="button"
-            onClick={this.handleThemeToggle}
-            className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary active:bg-gray-200 dark:active:bg-dark-bg-primary focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 transition-colors"
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            onClick={this.handleDarkModeToggle}
+            className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary active:bg-gray-200 dark:active:bg-dark-bg-primary focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 dark:focus:ring-offset-dark-bg-secondary transition-colors"
+            aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+            aria-pressed={isDarkMode}
           >
-            {theme === 'light' ? (
-              <MoonIcon className="w-5 h-5 text-gray-700 dark:text-dark-text-secondary" />
+            {isDarkMode ? (
+              <SunIcon className="w-5 h-5 text-yellow-400" />
             ) : (
-              <SunIcon className="w-5 h-5 text-gray-700 dark:text-dark-text-secondary" />
+              <MoonIcon className="w-5 h-5 text-gray-700 dark:text-dark-text-secondary" />
             )}
           </button>
         </div>

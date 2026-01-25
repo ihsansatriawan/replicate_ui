@@ -6,12 +6,55 @@ import { ThemeProvider } from './context';
 import { featuredItems } from './data/featuredItems';
 import { accordionItems } from './data/accordionItems';
 
-class App extends Component {
+interface AppState {
+  isDarkMode: boolean;
+}
+
+class App extends Component<Record<string, never>, AppState> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+    this.state = {
+      isDarkMode,
+    };
+  }
+
+  componentDidMount(): void {
+    this.applyTheme(this.state.isDarkMode);
+  }
+
+  applyTheme = (isDark: boolean): void => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  };
+
+  handleDarkModeToggle = (): void => {
+    this.setState(
+      (prevState) => {
+        const newIsDarkMode = !prevState.isDarkMode;
+        return { isDarkMode: newIsDarkMode };
+      },
+      () => {
+        this.applyTheme(this.state.isDarkMode);
+      }
+    );
+  };
+
   handleBackClick = (): void => {
     // Navigation logic - in real app: window.history.back() or router
   };
 
   render(): React.ReactNode {
+    const { isDarkMode } = this.state;
+
     return (
       <ThemeProvider>
         <div className="min-h-screen bg-gray-100 dark:bg-dark-bg-primary">
@@ -29,6 +72,8 @@ class App extends Component {
             <Header
               title="Jelajah Tokopedia"
               onBackClick={this.handleBackClick}
+              isDarkMode={isDarkMode}
+              onDarkModeToggle={this.handleDarkModeToggle}
             />
 
             {/* Main Content */}

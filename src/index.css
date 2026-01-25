@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Custom colors */
   --color-tokopedia-green: #03AC0E;
@@ -35,7 +37,7 @@
 
 @layer components {
   .icon-container {
-    @apply w-16 h-16 flex items-center justify-center bg-gray-50 rounded-2xl;
+    @apply w-16 h-16 flex items-center justify-center bg-gray-50 dark:bg-dark-bg-tertiary rounded-2xl;
   }
 }
 

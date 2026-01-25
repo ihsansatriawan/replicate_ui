@@ -48,7 +48,7 @@ class IconCard extends Component<IconCardProps, IconCardState> {
         type="button"
         onClick={this.handleClick}
         aria-label={label}
-        className="flex flex-col items-center group cursor-pointer bg-transparent border-none p-0 min-h-[88px] focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 rounded-2xl active:bg-gray-200 dark:active:bg-dark-bg-primary"
+        className="flex flex-col items-center group cursor-pointer bg-transparent border-none p-0 min-h-[88px] focus:outline-none focus:ring-2 focus:ring-tokopedia-green focus:ring-offset-2 dark:focus:ring-offset-dark-bg-secondary rounded-2xl active:bg-gray-200 dark:active:bg-dark-bg-primary"
       >
         <div className="w-16 h-16 flex items-center justify-center bg-gray-50 dark:bg-dark-bg-tertiary rounded-2xl mb-2 group-hover:bg-gray-100 dark:group-hover:bg-dark-bg-primary transition-colors">
           {this.renderIcon()}
