@@ -22,21 +22,21 @@ class FeaturedSection extends Component<FeaturedSectionProps, FeaturedSectionSta
     const { isExpanded } = this.state;
 
     return (
-      <section className="bg-white">
+      <section className="bg-white dark:bg-dark-bg-secondary">
         {/* Section Header */}
         <button
           type="button"
           onClick={this.handleToggle}
-          className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
+          className="flex items-center justify-between w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-dark-bg-tertiary active:bg-gray-100 dark:active:bg-dark-bg-primary transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tokopedia-green"
           aria-expanded={isExpanded}
           aria-controls="featured-content"
         >
-          <h2 className="text-base font-semibold text-gray-900">
+          <h2 className="text-base font-semibold text-gray-900 dark:text-dark-text-primary">
             {title}
           </h2>
           <ChevronIcon
             direction={isExpanded ? 'up' : 'down'}
-            className="w-5 h-5 text-gray-500"
+            className="w-5 h-5 text-gray-500 dark:text-dark-text-secondary"
           />
         </button>
 
@@ -59,7 +59,7 @@ class FeaturedSection extends Component<FeaturedSectionProps, FeaturedSectionSta
         </div>
 
         {/* Bottom Border */}
-        <div className="h-2 bg-gray-100" />
+        <div className="h-2 bg-gray-100 dark:bg-dark-border" />
       </section>
     );
   }
