@@ -8,6 +8,15 @@
   --color-tokopedia-green-light: #E8F5E9;
   --color-tokopedia-green-dark: #028A0F;
 
+  /* Dark mode colors */
+  --color-dark-bg-primary: #1a1a1a;
+  --color-dark-bg-secondary: #2d2d2d;
+  --color-dark-bg-tertiary: #3a3a3a;
+  --color-dark-border: #404040;
+  --color-dark-text-primary: #e5e5e5;
+  --color-dark-text-secondary: #a3a3a3;
+  --color-tokopedia-green-dark-mode: #04D415;
+
   /* Custom max-width */
   --max-width-mobile: 428px;
 
@@ -22,13 +31,13 @@
   }
 
   body {
-    @apply bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 m-0 font-sans;
+    @apply bg-gray-100 dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary m-0 font-sans;
   }
 }
 
 @layer components {
   .icon-container {
-    @apply w-16 h-16 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-2xl;
+    @apply w-16 h-16 flex items-center justify-center bg-gray-50 dark:bg-dark-bg-tertiary rounded-2xl;
   }
 }
 
